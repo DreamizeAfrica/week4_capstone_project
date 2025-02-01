@@ -11,7 +11,7 @@ struct Train{
 void viewAvailableTrains( struct Train trains[], int availableTrains){
 	printf("\nAvailable Trains: \n\n");
 	for (int i=0; i<availableTrains; i++){
-		printf("Train No: %d, Destination: %s, Available Seats: %d, Price: %.f RWF\n", trains[i].trainNumber, trains[i].destination, trains[i].availableSeats, trains[i].ticketPrice);
+		printf("Train No: %d, Destination: %s, Available Seats: %d, Price: %.f RWF\n\n", trains[i].trainNumber, trains[i].destination, trains[i].availableSeats, trains[i].ticketPrice);
 	}
 }
 
@@ -31,7 +31,7 @@ void bookTickets(struct Train trains[], int availableTrains){
 			if(trains[i].availableSeats>=seatsToBook){
 				trains[i].availableSeats-=seatsToBook;
 				printf("%d tickets booked successfully on Train No: %d.\n", seatsToBook, trainNumber);
-				printf("Remaning seats: %d",trains[i].availableSeats);				
+				printf("Remaning seats: %d\n\n",trains[i].availableSeats);				
 			}else{
 				printf("Not enough seats available on Train No: %d.\n", trainNumber);
 			}
@@ -44,16 +44,15 @@ void bookTickets(struct Train trains[], int availableTrains){
 	
 }
 
-
 // dy 44
 
 void cancelTickets(struct Train trains[], int availableTrains){
 	int trainNumber, seatsToCancel;
 	
-	printf("\nEntet the train number: ");
+	printf("\nEnter the train number: ");
 	scanf("%d", &trainNumber);
 	
-	printf("\nEnter number of seats to cancel: ");
+	printf("Enter number of seats to cancel: ");
 	scanf("%d", &seatsToCancel);
 	
 	int found=0;
@@ -62,7 +61,7 @@ void cancelTickets(struct Train trains[], int availableTrains){
 			found=1;
 			trains[i].availableSeats+=seatsToCancel;
 			printf("%d tickets canceled successfully on Train No: %d.\n", seatsToCancel, trainNumber);
-            printf("Remaining seats: %d\n", trains[i].availableSeats);
+            printf("Remaining seats: %d\n\n", trains[i].availableSeats);
             break;
 		}
 	}
@@ -106,14 +105,15 @@ int main(){
 	};
 	// ady 1
 	
+	int choice;
 	printf("Choose an option: \n\n");
 	printf("1. View available trains\n");
 	printf("2. Book tickets\n");
 	printf("3. Cancel tickets\n");
-	printf("4. Search by destination\n\n");
-	
-	int choice;
-	printf("Enter your choice: ");
+	printf("4. Search by destination\n");
+	printf("5. Exit");
+	for (int i=0; i<5; i++){
+	printf("\n\nEnter your choice: ");
 	scanf("%d", &choice);
 	
 	switch (choice){
@@ -129,10 +129,14 @@ int main(){
 		case 4:
 			searchTrains(trains, 5); // day5
 			break;
+		case 5:
+			printf("Exiting the program.\n");
+		    return 0;
 		default:
 			printf("\nInvalid user choice, Exit!");
+			i--; 
 	}
 	
-	return 0;
+	}
 
 }
