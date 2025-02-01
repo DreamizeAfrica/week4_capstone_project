@@ -72,6 +72,26 @@ void cancelTickets(struct Train trains[], int availableTrains){
 }
 
 
+//day 5
+void searchTrains(struct Train trains[], int availableTrains){
+	char destination[50];
+	printf("\nEnter the destination to search: ");
+	scanf("%s", &destination);
+	
+	int found=0;
+	printf("\nSearch results:\n");
+	for (int i=0; i<availableTrains; i++){
+		if(strcmp(trains[i].destination, destination)==0){
+			found=1;
+			printf("Train No: %d, Destination: %s, Available Seats: %d, Price: %.f RWF\n",
+                   trains[i].trainNumber, trains[i].destination, trains[i].availableSeats, trains[i].ticketPrice);
+		}
+	}
+	if(!found){
+		printf("No trains found for destination: %s\n", destination);
+	}
+} 
+
 int main(){
 	
 	
@@ -107,7 +127,7 @@ int main(){
 			cancelTickets(trains, 5); // day 4
 			break;
 		case 4:
-			printf("Search by destination feature coming soon!");
+			searchTrains(trains, 5); // day5
 			break;
 		default:
 			printf("\nInvalid user choice, Exit!");
