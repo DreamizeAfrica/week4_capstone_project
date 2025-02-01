@@ -15,8 +15,40 @@ void viewAvailableTrains( struct Train trains[], int availableTrains){
 	}
 }
 
+void bookTickets(struct Train trains[], int availableTrains){
+	int trainNumber, seatsToBook;
+	printf("\nEnter the train number: ");
+	scanf("%d", &trainNumber);
+	
+	printf("\nEnter the seats to book: ");
+	scanf("%d", &seatsToBook);
+	
+	
+	int found=0;
+	int totalSeats=30, remainingSeats;
+	for (int i=0; i<availableTrains; i++){
+		if(trains[i].trainNumber==trainNumber){
+			found=1;
+			if(trains[i].availableSeats>=seatsToBook){
+				remainingSeats=trains[i].availableSeats-=seatsToBook;
+				printf("%d tickets booked successfully on Train No: %d.\n", seatsToBook, trainNumber);
+				printf("Remaning seats: %d", remainingSeats);				
+			}else{
+				printf("Not enough seats available on Train No: %d.\n", trainNumber);
+			}
+			break;
+		}
+	}
+	if(!found){
+		printf("Train No: %d not found.\n", trainNumber);
+	}
+	
+}
+
 
 int main(){
+	
+	
 	//day 2
 	
 	struct Train trains[5]={
@@ -43,7 +75,7 @@ int main(){
 			viewAvailableTrains(trains, 5);
 			break;
 		case 2:
-			printf("Book tickets feature coming soon!");
+			bookTickets(trains, 5); // day 3
 			break;
 		case 3:
 			printf("Cancel tickets feature coming soon!");
